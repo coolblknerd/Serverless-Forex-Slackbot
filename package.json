@@ -1,0 +1,16 @@
+{
+  "name": "Serverless SlackBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "install.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Reginald J. Davis",
+  "license": "ISC",
+  "dependencies": {
+    "fetch": "^1.1.0",
+    "node-fetch": "^1.7.0",
+    "querystring": "^0.2.0"
+  }
+}
