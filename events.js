@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const AWS = require('aws-sdk');
 
+const lambda = new AWS.Lambda();
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const getSlackEvent = event => ({
@@ -36,9 +37,34 @@ const getTeam = (event) => {
     .then(data => Object.assign(event, { team: data.Item }));
 };
 
+const checkForMention = (event) => {
+  const message = event.slack.event.text;
+  const botUserId = event.team.bot.bot_user_id;
+  const botUserIsMentioned = new RegExp(`^<@${botUserId}>.*$`);
+  if (botUserIsMentioned.test(message)) {
+    console.log(`Bot ${botUserId} is mentioned in "${message}"`)
+    return event;
+  }
+}
+
+const actionFunctionName = `${process.env.NAMESPACE}-actions`;
+
+const invokeAction = (event) => {
+  if (!event) return null;
+  console.log(`Invoking ${actionFunctionName} with event`, event);
+  return lambda.invoke({
+    FunctionName: actionFunctionName,
+    InvocationType: 'Event',
+    LogType: 'None',
+    Payload: JSON.stringify(event),
+  }).promise();
+};
+
 module.exports.handler = (event, context, callback) => Promise.resolve(event)
     .then(getSlackEvent)
     .then(respond(callback))
     .then(verifyToken)
     .then(getTeam)
+    .then(checkForMention)
+    .then(invokeAction)
     .catch(callback);

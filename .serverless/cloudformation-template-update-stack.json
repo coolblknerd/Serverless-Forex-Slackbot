@@ -70,6 +70,20 @@
                     [
                       {
                         "Fn::GetAtt": [
+                          "ActionsLogGroup",
+                          "Arn"
+                        ]
+                      },
+                      "*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    ":",
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "EventsLogGroup",
                           "Arn"
                         ]
@@ -103,6 +117,15 @@
               "Resource": [
                 "arn:aws:dynamodb:*:*:table/forex-dev-teams"
               ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "lambda:invokeFunction"
+              ],
+              "Resource": [
+                "arn:aws:lambda:*:*:function:forex-dev-actions"
+              ]
             }
           ]
         },
@@ -111,6 +134,12 @@
             "Ref": "IamRoleLambdaExecution"
           }
         ]
+      }
+    },
+    "ActionsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/forex-dev-actions"
       }
     },
     "EventsLogGroup": {
@@ -125,6 +154,53 @@
         "LogGroupName": "/aws/lambda/forex-dev-install"
       }
     },
+    "ActionsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/forex/dev/1496516097947-2017-06-03T18:54:57.947Z/forex.zip"
+        },
+        "FunctionName": "forex-dev-actions",
+        "Handler": "actions.handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs4.3",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "CLIENT_ID": "165858646675.192416803751",
+            "CLIENT_SECRET": "4409f241333e4140411eae196bfc39f6",
+            "VERIFICATION_TOKEN": "qOP3Iz1Iob1t5nisZHk40zTC",
+            "SUCCESS_URL": "https://s3.amazonaws.com/mypoeticbucket/success.html",
+            "ERROR_URL": "https://s3.amazonaws.com/mypoeticbucket/error.html",
+            "NAMESPACE": "forex-dev",
+            "TEAMS_TABLE": "forex-dev-teams"
+          }
+        }
+      },
+      "DependsOn": [
+        "IamPolicyLambdaExecution",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "ActionsLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "ActionsLambdaFunction"
+        },
+        "CodeSha256": "learXWkShHTuTs6q6NX+K1JpqOOeZRJ5xzhoL1yJzuY="
+      }
+    },
     "EventsLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -132,7 +208,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/forex/dev/1496440515296-2017-06-02T21:55:15.296Z/forex.zip"
+          "S3Key": "serverless/forex/dev/1496516097947-2017-06-03T18:54:57.947Z/forex.zip"
         },
         "FunctionName": "forex-dev-events",
         "Handler": "events.handler",
@@ -162,14 +238,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "EventsLambdaVersionzCY0hU3aMu9RLANF9Iag3g4J7mVGjUWOu8H2aRydw": {
+    "EventsLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EventsLambdaFunction"
         },
-        "CodeSha256": "zCY0hU3aMu9RLA+NF9Iag3g4J7mV/GjUWOu8H2aRydw="
+        "CodeSha256": "learXWkShHTuTs6q6NX+K1JpqOOeZRJ5xzhoL1yJzuY="
       }
     },
     "InstallLambdaFunction": {
@@ -179,7 +255,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/forex/dev/1496440515296-2017-06-02T21:55:15.296Z/forex.zip"
+          "S3Key": "serverless/forex/dev/1496516097947-2017-06-03T18:54:57.947Z/forex.zip"
         },
         "FunctionName": "forex-dev-install",
         "Handler": "install.handler",
@@ -209,14 +285,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "InstallLambdaVersionzCY0hU3aMu9RLANF9Iag3g4J7mVGjUWOu8H2aRydw": {
+    "InstallLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "InstallLambdaFunction"
         },
-        "CodeSha256": "zCY0hU3aMu9RLA+NF9Iag3g4J7mV/GjUWOu8H2aRydw="
+        "CodeSha256": "learXWkShHTuTs6q6NX+K1JpqOOeZRJ5xzhoL1yJzuY="
       }
     },
     "ApiGatewayRestApi": {
@@ -331,7 +407,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1496440515317": {
+    "ApiGatewayDeployment1496516097974": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -439,16 +515,22 @@
         "Ref": "ServerlessDeploymentBucket"
       }
     },
+    "ActionsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "ActionsLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY"
+      }
+    },
     "EventsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EventsLambdaVersionzCY0hU3aMu9RLANF9Iag3g4J7mVGjUWOu8H2aRydw"
+        "Ref": "EventsLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY"
       }
     },
     "InstallLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "InstallLambdaVersionzCY0hU3aMu9RLANF9Iag3g4J7mVGjUWOu8H2aRydw"
+        "Ref": "InstallLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY"
       }
     },
     "ServiceEndpoint": {
