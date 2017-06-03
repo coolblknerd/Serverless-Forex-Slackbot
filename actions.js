@@ -1,3 +1,4 @@
+const qs = require('querystring');
 const fetch = require('node-fetch');
 
 const log = (event) => {
@@ -51,8 +52,25 @@ const doCommand = (event) => {
   return Object.assign(event, { reply: defaultReply });
 };
 
+const sendResponse = (event) => {
+  const params = {
+    token: event.team.bot.bot_access_token,
+    channel: event.slack.event.channel,
+    text: event.reply,
+  };
+  const url = `https://slack.com/api/chat.postMessage?${qs.stringify(params)}`;
+  console.log(`Requesting ${url}`);
+  return fetch(url)
+    .then(response => response.json())
+    .then((response) => {
+      if (!response.ok) throw new Error('SlackAPIError');
+      return Object.assign(event, { response });
+    });
+};
+
 module.exports.handler = (event, context, callback) => log(event)
   .then(doCommand)
+  .then(sendResponse)
   .then(log)
   .then(() => callback(null))
   .catch(callback);

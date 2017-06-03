@@ -161,7 +161,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/forex/dev/1496516097947-2017-06-03T18:54:57.947Z/forex.zip"
+          "S3Key": "serverless/forex/dev/1496518311089-2017-06-03T19:31:51.089Z/forex.zip"
         },
         "FunctionName": "forex-dev-actions",
         "Handler": "actions.handler",
@@ -191,14 +191,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "ActionsLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY": {
+    "ActionsLambdaVersion64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ActionsLambdaFunction"
         },
-        "CodeSha256": "learXWkShHTuTs6q6NX+K1JpqOOeZRJ5xzhoL1yJzuY="
+        "CodeSha256": "64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8="
       }
     },
     "EventsLambdaFunction": {
@@ -208,7 +208,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/forex/dev/1496516097947-2017-06-03T18:54:57.947Z/forex.zip"
+          "S3Key": "serverless/forex/dev/1496518311089-2017-06-03T19:31:51.089Z/forex.zip"
         },
         "FunctionName": "forex-dev-events",
         "Handler": "events.handler",
@@ -238,14 +238,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "EventsLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY": {
+    "EventsLambdaVersion64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EventsLambdaFunction"
         },
-        "CodeSha256": "learXWkShHTuTs6q6NX+K1JpqOOeZRJ5xzhoL1yJzuY="
+        "CodeSha256": "64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8="
       }
     },
     "InstallLambdaFunction": {
@@ -255,7 +255,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/forex/dev/1496516097947-2017-06-03T18:54:57.947Z/forex.zip"
+          "S3Key": "serverless/forex/dev/1496518311089-2017-06-03T19:31:51.089Z/forex.zip"
         },
         "FunctionName": "forex-dev-install",
         "Handler": "install.handler",
@@ -285,14 +285,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "InstallLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY": {
+    "InstallLambdaVersion64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "InstallLambdaFunction"
         },
-        "CodeSha256": "learXWkShHTuTs6q6NX+K1JpqOOeZRJ5xzhoL1yJzuY="
+        "CodeSha256": "64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8="
       }
     },
     "ApiGatewayRestApi": {
@@ -407,7 +407,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1496516097974": {
+    "ApiGatewayDeployment1496518311117": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -518,19 +518,19 @@
     "ActionsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ActionsLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY"
+        "Ref": "ActionsLambdaVersion64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8"
       }
     },
     "EventsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EventsLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY"
+        "Ref": "EventsLambdaVersion64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8"
       }
     },
     "InstallLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "InstallLambdaVersionlearXWkShHTuTs6q6NXK1JpqOOeZRJ5xzhoL1yJzuY"
+        "Ref": "InstallLambdaVersion64gjoxS815zopgzeATSIP0spGmlQDo6QVhPuq8wZsT8"
       }
     },
     "ServiceEndpoint": {
